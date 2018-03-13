@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <body>
+    {% extends 'blog/base_bootstrap.html' %}
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="{% url 'home'%}">Home</a>
+          <a class="blog-nav-item active" href="{% url 'post_list' %}">Blogs</a>
+          <a class="blog-nav-item" href="#">Press</a>
+          <a class="blog-nav-item" href="#">New hires</a>
+          <a class="blog-nav-item" href="#">About</a>
+        </nav>
+      </div>
+    </div>
+
+    {% block content %}
+        {% for post in posts %}
+            <div class="blog-post">
+{#                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>#}
+                <div class="blog-post-title">
+                    <p><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></p>
+                </div>
+                <div class="blog-post-meta">
+                    Published Date: {{ post.published_date }}
+                </div>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    {% endblock content %}
+
+
+    </body>
+</html>
